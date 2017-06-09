@@ -23,20 +23,31 @@ body {
 	line-height: 1.5;
 }
 
-@media (max-width: 360px) {  
-  .nl-form, .intro {
+@media (max-width: 375px) {  
+  .nl-form {
 	font-size:1em;
 	}
+	.intro {
+		font-size:1.5em;
+	}
 }
-@media (max-width: 992px) and (min-width: 360px) {  
-  .nl-form, .intro {
-	font-size:1.5em;
+@media (max-width: 992px) and (min-width: 375px) {  
+ .nl-form {
+		font-size:1.5em;
+	}
+	 .intro {
+		font-size:2em;
 	}
 }
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-  .nl-form, .intro  {font-size:3em;} /*1rem = 16px*/
+	.nl-form {
+		font-size:2em;
+	}
+	 .intro {
+		font-size:3em;
+	}
 }
 .nl-form{
   background: rgba(38, 65, 89, 0.25);

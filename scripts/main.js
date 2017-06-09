@@ -12,6 +12,8 @@
 
 	requirejs(["scripts/typed.js"], function(util) {
 		showIntro();
+		showGuessFormPrenom();
+		
 	});
 
 var showIntro = function(){
@@ -25,7 +27,7 @@ var showIntro = function(){
 var showFormulaire = function(){
 	Typed.new('.mesInfos', {
 	 strings: ["<div>Je suis <nbsp>"
-	 +'<input type="text" class="nl-ti-text" value="" placeholder="Votre nom"/></div>'
+	 +'<input type="text" name="nom" class="nl-ti-text" value="" placeholder="Votre nom"/></div>'
 		 +"<div>Je peut être contacté à l'adresse suivante "
 		 +'<input type="text" name="adresse" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale"/></div>'		 
 	 ],
@@ -33,16 +35,19 @@ var showFormulaire = function(){
 	 startDelay:500,
 	 contentType:'html',
 	 showCursor:false,
-		callback:function(){
+	 callback:function(){
 		 document.getElementsByName('adresse')[0].onchange=function(){
-	 		if(!monpariVisible){
-	 			monpariVisible=true;
-	 			showGuessForm();
-				setCompleted('mesInfos');
-	 		}
-	 	}
-	 }
+			
+			setCompleted('mesInfos');
+		 };
+		 document.getElementsByName('adresse')[0].onkeypress=function(){
+			if(!monpariVisible){		
+				monpariVisible=true;	
+				showGuessForm();				
 
+			}
+		  };		 
+	 }
 	});
 };
 //date 
@@ -91,12 +96,14 @@ var showGuessFormSuite = function(){
 	 showCursor:false,
 	 callback:function(){
 		document.getElementsByName('taille')[0].onchange=function(){
-			if(!monpari3Visible){
-				monpari3Visible=true;
+			setCompleted("monpari2");
+		};
+		document.getElementsByName('taille')[0].onkeypress=function(){
+			if(!monpari3Visible){		
+				monpariVisible=true;	
 				showGuessmonpari3();
-				setCompleted("monpari2");
 			}
-		}
+		};	
 	 }
 	});
 }
@@ -121,10 +128,15 @@ var showGuessmonpari3 = function(){
 	 showCursor:false,
 	 callback:function(){
 		document.getElementsByName('poids')[0].onchange=function(){
+			setCompleted("monpari3");
+			
+		}
+		document.getElementsByName('poids')[0].onkeypress=function(){
 			if(!monpari4Visible){
 				monpari4Visible=true;
 				showGuessFormPrenom();
-				setCompleted("monpari3");
+				document.getElementById('validationbtn').style.display='block';
+
 			}
 		}
 	 }
@@ -144,11 +156,13 @@ var showGuessFormPrenom = function(){
 	 showCursor:false,
 	 callback:function(){
 		document.getElementsByName('prenom')[0].onchange=function(){
-			if(!buttonValidationVisible){
+			setCompleted("monpari4");
+		}
+		
+		document.getElementsByName('prenom')[0].onkeypress=function(){
+			if(!buttonValidationVisible){			
 				buttonValidationVisible=true;				
-				setCompleted("monpari4");
-				document.getElementsByName('prenom')
-				document.getElementById('validationbtn').style.display='block';
+				document.getElementById('validationbtn').disabled=false;
 			}
 		}
 	 }
@@ -157,16 +171,53 @@ var showGuessFormPrenom = function(){
 };
 
 var buttonValidationVisible = false;
-document.getElementById('validationbtn').style.display='none';
+document.getElementById('validationbtn').disabled=true;
 
 var sendTentative = function(data){
 	var oReq = new XMLHttpRequest();
-	var host = 'https://hook.io/mikael-came-gmail-com/storebetmybaby'
-	var url = host + "/" + username + "/" + guess;
+	var host = 'https://hook.io/mikael-came-gmail-com/betonmybaby'
+	
+	var data = loadData();
+	console.log("data query,",serialize(data));
+	var url = host + "/?data=" +serialize(data);
 	oReq.open('POST', url);
 	oReq.send(null);
 
 	oReq.onload = function () {
 		console.log('callBack, enregistrement effectué');
+		alert("Merci beaucoup de votre participation ! \r\n Elo & Mike");
 	};
+};
+var serialize = function(obj){
+	var str = [];
+	return Object.keys(obj).map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(obj[k])).join('&');
+
+}
+
+var loadData = function(){
+	var data = {nom : '',
+				adresse : '',
+				taille:'',
+				poids:0,
+				date:'',
+				moment:'',
+				prenom:''
+		
+	};
+	if(document.getElementsByName('nom')[0])
+	data.nom = document.getElementsByName('nom')[0].value;
+	if(document.getElementsByName('adresse')[0])
+	data.adresse = document.getElementsByName('adresse')[0].value;
+	if(document.getElementsByName('taille')[0])
+	data.taille = document.getElementsByName('taille')[0].value;
+	if(document.getElementsByName('poids')[0])
+	data.poids = document.getElementsByName('poids')[0].value;
+	if(document.getElementsByName('date')[0])
+	data.date = document.getElementsByName('date')[0].value;
+	if(document.getElementsByName('select')[0])
+	data.moment = document.getElementsByName('select')[0].value;
+	if(document.getElementsByName('prenom')[0])
+	data.prenom = document.getElementsByName('prenom')[0].value;
+	
+	return data;
 };
