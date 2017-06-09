@@ -19,8 +19,83 @@ body {
   text-shadow: black 0.3em 0.3em 0.3em;
 }
 
-#listeTentatives .list-group-item{
-  background:transparent;
-  color: white;
-  text-shadow: black 0.3em 0.3em 0.3em;
+.texte{
+  font-size: 20px;
+}
+
+.nl-form, .intro {
+	width: 100%;
+	margin: 0.3em auto 0 auto;
+	font-size: 3em;
+	line-height: 1.5;
+}
+
+.nl-form input,
+.nl-form select,
+.nl-form button {
+	border: none;
+	background: transparent;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+.nl-form input:focus {
+	outline: none;
+
+}
+.nl-form input:focus.adresse {
+  width: 100%;
+}
+.nl-field {
+	display: inline-block;
+	position: relative;
+}
+
+.nl-field-toggle,
+.nl-form input,
+.nl-form select  {
+	line-height: inherit;
+	display: inline-block;
+	color: #fff;
+	cursor: pointer;
+	border-bottom: 1px dashed #fff;
+}
+.nl-form input.adresse{
+  min-width: 8em;
+  overflow: auto;
+}
+.nl-ty-number{
+  padding: 0.2em 2em 0.2em 0.5em;
+  border-bottom: none;
+  text-align: right;
+  width: 2em;
+}
+.nl-form input.date{
+  width: 8em;
+}
+.nl-ti-text {
+	padding: 0.2em 2em 0.2em 0.5em;
+	border-bottom: none;
+	color: #fff;
+}
+/* drop-down list / text element */
+.nl-field ul {
+	position: absolute;
+	visibility: hidden;
+	background: #76C3BD;
+	left: -0.5em;
+	top: 50%;
+	font-size: 80%;
+	opacity: 0;
+	transform: translateY(-40%) scale(0.9);
+	transition: visibility 0s 0.3s, opacity 0.3s, transform 0.3s;
+}
+.nl-field ul li {
+	color: #fff;
+	position: relative;
 }

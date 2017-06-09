@@ -1,56 +1,42 @@
-﻿<html>
-<head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://www.gstatic.com/firebasejs/4.1.1/firebase.js"></script>
-	<script>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script data-main="scripts/main" src="scripts/require.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen">
+		<meta charset="utf8">
 
-	</script>
+		<title>BetMyBaby</title>
 
+	</head>
+	<body>
 
-	<script data-main="scripts/main" src="scripts/require.js"></script>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen">
-	<meta charset="utf8">
+		<div class="container superbg">
+			<div class="intro form-group white"></div>
 
-	<title>GuessMyName</title>
+			<form id="formulaire"class="nl-form form-horizontal">
+				<span class="mesInfos form-group white">
 
-</head>
-<body>
+				</span>
+				<span class="monpari form-group white">
+					<p>
+					Je prend le pari que le bébé naîtra
+					<select>
+						<option value="matin" selected>le matin</option>
+						<option value="midi">l'après midi</option>
+						<option value="soir">le soir</option>
+						<option value="nuit">la nuit</option>
+					</select>
+					du <input type="date" class="date" value="2017-08-26" name="date">.<br />
+					A la naissance, elle mesurera la taille de
+					<input type="number" class="nl-ty-number" step="1"name="taille"> cm et pèsera
+					<input type="number" class="nl-ty-number" step="0.1"name="poids"> kg.<br />
+					Ses parents auront choisi le prénom :
+					<input type="text" class="nl-ti-text" value="" placeholder="le prénom"/>
 
-	<div class="container superbg">
-		
-		<div class="jumbotron">
-			<h1>Arriveras-tu à trouver mon futur prénom?</h1>
+				</p>
+			</span>
+			</form>
 		</div>
-
-		<form class="form-horizontal">
-		<div class="form-group white">
-				<label class="col-sm-2 control-label" for="name">Je suis : </label>
-				<div class="col-sm-4">
-					<input type="text" class="form-control" id="username">
-				</div>
-			</div>
-			<div class="form-group white">
-				<label class="col-sm-2 control-label" for="name">Je tente le prénom : </label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="name">
-					<button  class="btn btn-default btn-block"
-									 onclick="test(document.getElementById('name').value);return false;"
-					>Vérifier ce prénom</button>
-				</div>
-			</div>
-			</form>
-
-			<form class="form-horizontal">
-				<div id= "tentatives" class="form-group white" style="display:none">
-					<label class = "col-sm-2 control-label white" for="name">Tentatives : </label>
-					<div class = "col-sm-10">
-						<ul id="listeTentatives" class="list-group"></ul>
-					</div>
-				</div>
-			</form>
-	</div>
-</body>
-
-
+	</body>
 </html>

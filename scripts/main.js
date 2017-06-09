@@ -1,83 +1,66 @@
+	var data = {
+						nom : '',
+						adresse : '',
+						pari : {
+										taille:'',
+										poids:0,
+										date:'',
+										moment:''
+						}
+					};
 
-	// Tu crois vraiment que je balancerai le prénom de notre fille, comme ça ...
-	var secret = "7f481125cb09c0f7f91044996b90b7b7d29104d7";
-	var username = 'Anonymous';
-	
-	var messagesError = ["Nope.", "Désolé ce n'est pas ca.",
-	"Retente ta chance.", "Quand même pas !",
-	"Oula... non pas du tout !", "Non, ce n'est pas ça."
-	];
 
-	var tentatives=[];
-	define(function (require) {
-		var sha1 = require('./sha1');
+	requirejs(["scripts/typed.js"], function(util) {
+		//showIntro();
+
+
 	});
 
-	var test = function(name){
-		var hash = sha1.create();
-		if(name){
-			
-			nameFormatte = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()
-			hash.update(nameFormatte);
+var showIntro = function(){
+	Typed.new('.intro', {
+	 strings: ["Bonjour ! <br/>Faites vos pronostics sur le futur bébé de Mikaël et Elodie en complétant le formulaire suivant : "],
+	 typeSpeed: 0,
+	 callback:showFormulaire
+	});
+};
 
-			if(hash === secret){
-				alert("Oui ! C'est la bonne réponse!");
-			}
-			else{
-				showError();
-				resetForm();
-				addTentatives(nameFormatte);
-			}
-			
-			sendTentative(nameFormatte);
-		}
-	};
+var showFormulaire = function(){
+	Typed.new('.mesInfos', {
+	 strings: ["Je suis <nbsp>"
+	 +'<input type="text" class="nl-ti-text" value="" placeholder="Votre nom"/>'
+		 +"<nbsp>et je peut être contacté à l'adresse suivante <nbsp>"
+		 +'<input type="text" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale""/>.'
+		 +'<button  class="btn btn-default btn-block" onclick="showGuessForm();return false;">suite</button>'
+	 ],
+	 typeSpeed: 0,
+	 startDelay:0,
+	 contentType:'html',
+	 showCursor:false
+	});
+};
 
-	var showError  = function(){
-		var messagesErrorID = Math.floor(Math.random() * messagesError.length);
-		alert( messagesError[messagesErrorID]);
-	};
-
-	var resetForm = function(){
-		document.getElementById('name').value='';
-	};
-
-	var addTentatives = function(name){
-		// Affiches liste des tentatives
-		document.getElementById('tentatives').style.display="block";
-
-		// Ajoute une tentative à la liste
-		addTentative(name);	
-	};
-
-	var addTentative = function(name){
-		var newLI = document.createElement('li');
-		newLI.classList.add("list-group-item");
-		newLI.appendChild(document.createTextNode(name));
-		document.getElementById("listeTentatives").appendChild(newLI);
-	};
-
-	var sendTentative = function(guess){
+var showGuessForm = function(){
+	Typed.new('.monpari', {
+	 strings: ["Je suis <nbsp>"
+	 +'<input type="text" class="nl-ti-text" value="" placeholder="Votre nom"/>'
+		 +"<nbsp>et je peut être contacté à l'adresse suivante <nbsp>"
+		 +'<input type="text" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale""/>.'
+		 +'<button  class="btn btn-default btn-block" onclick="showGuessForm();return false;">suite</button>'
+	 ],
+	 typeSpeed: 0,
+	 startDelay:0,
+	 contentType:'html',
+	 showCursor:false
+	});
+}
+	var sendTentative = function(data){
 		var oReq = new XMLHttpRequest();
-		var host = 'https://hook.io/mikael-came-gmail-com/storeguessmyname'
+		var host = 'https://hook.io/mikael-came-gmail-com/storebetmybaby'
 		var url = host + "/" + username + "/" + guess;
 		oReq.open('POST', url);
 		oReq.send(null);
-		
+
 		oReq.onload = function () {
-			console.log('callBack, enregistrement done');
+			console.log('callBack, enregistrement effectué');
 		};
 	};
-	
-	document.getElementById('username').value = username;
-	document.getElementById("username").addEventListener('change', function() {
-			 username = this.value;
-	}, false);
-		
-	document.getElementById("username").addEventListener('focus', function() {
-			 if(this.value === "Anonymous"){
-				username = "";
-				this.value="";
-			 }
-			 
-	}, false);
