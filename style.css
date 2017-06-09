@@ -14,24 +14,29 @@ body {
 .texte{
   font-size: 20px;
 }
-@media (min-width: 544px) {  
-  .nl-form, .intro { {font-size:2em;} /*1rem = 16px*/
-}
- 
-/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-@media (min-width: 768px) {  
-  .nl-form, .intro { {font-size:2em;} /*1rem = 16px*/
-}
- 
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-  .nl-form, .intro { {font-size:3em;} /*1rem = 16px*/
-}
+
+
 .nl-form, .intro {
 	width: 100%;
 	margin: 0.3em auto 0 auto;
 	font-size: 3em;
 	line-height: 1.5;
+}
+
+@media (max-width: 360px) {  
+  .nl-form, .intro {
+	font-size:1em;
+	}
+}
+@media (max-width: 992px) and (min-width: 360px) {  
+  .nl-form, .intro {
+	font-size:1.5em;
+	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  .nl-form, .intro  {font-size:3em;} /*1rem = 16px*/
 }
 .nl-form{
   background: rgba(38, 65, 89, 0.25);
