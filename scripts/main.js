@@ -12,8 +12,8 @@
 
 	requirejs(["scripts/typed.js"], function(util) {
 		showIntro();
-		
-		
+
+
 	});
 
 var showIntro = function(){
@@ -29,7 +29,7 @@ var showFormulaire = function(){
 	 strings: ["<div>Je suis <nbsp>"
 	 +'<input type="text" name="nom" class="nl-ti-text" value="" placeholder="Votre nom"/></div>'
 		 +"<div>Je peut être contacté à l'adresse suivante "
-		 +'<input type="text" name="adresse" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale"/></div>'		 
+		 +'<input type="text" name="adresse" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale"/></div>'
 	 ],
 	 typeSpeed: 0,
 	 startDelay:500,
@@ -37,27 +37,27 @@ var showFormulaire = function(){
 	 showCursor:false,
 	 callback:function(){
 		 document.getElementsByName('adresse')[0].onchange=function(){
-			
+
 			setCompleted('mesInfos');
 		 };
-		 document.getElementsByName('adresse')[0].onkeypress=function(){
-			if(!monpariVisible){		
-				monpariVisible=true;	
-				showGuessForm();				
+		 document.getElementsByName('adresse')[0].onkeyup=function(){
+			if(!monpariVisible){
+				monpariVisible=true;
+				showGuessForm();
 
 			}
-		  };		 
+		  };
 	 }
 	});
 };
-//date 
+//date
 var monpariVisible=false;
 var showGuessForm = function(){
 	Typed.new('.monpari', {
 	 strings: ['<div>Je prend le pari que le bébé naîtra'
 	 +'<select name="select"> '
-	 +  '<option value="" selected></option>'
-		 +'<option value="matin">le matin</option>'
+
+		 +'<option value="matin" selected>le matin</option>'
 		 +"<option value='midi'>l'après midi</option>"
 		 +'<option value="soir">le soir</option>'
 		 +'<option value="nuit">la nuit</option>'
@@ -75,7 +75,21 @@ var showGuessForm = function(){
 	 			showGuessFormSuite();
 				setCompleted("monpari");
 	 		}
-	 	}
+	 	};
+		document.getElementsByName('date')[0].onkeyup=function(){
+		 if(!monpari2Visible){
+			 monpari2Visible=true;
+			 showGuessFormSuite();
+			 setCompleted("monpari");
+		  }
+		 };
+		 document.getElementsByName('date')[0].onchange=function(){
+	 		if(!monpari2Visible){
+	 			monpari2Visible=true;
+	 			showGuessFormSuite();
+				setCompleted("monpari");
+	 		}
+		 };
 	 }
 	});
 
@@ -86,9 +100,9 @@ var monpari2Visible = false;
 var showGuessFormSuite = function(){
 	Typed.new('.monpari2', {
 	  strings: ['<div>'
-	 +'A la naissance, elle mesurera la taille de'
+	 +'A la naissance, bébé mesurera la taille de'
 	 +'<input type="number" class="nl-ty-number" step="1" name="taille" placeholder=""><nbsp>cm </div>'
-	
+
 	 ],
 	 typeSpeed: 1,
 	 startDelay:0,
@@ -97,13 +111,17 @@ var showGuessFormSuite = function(){
 	 callback:function(){
 		document.getElementsByName('taille')[0].onchange=function(){
 			setCompleted("monpari2");
-		};
-		document.getElementsByName('taille')[0].onkeypress=function(){
-			if(!monpari3Visible){		
-				monpariVisible=true;	
+			if(!monpari3Visible){
+				monpariVisible=true;
 				showGuessmonpari3();
 			}
-		};	
+		};
+		document.getElementsByName('taille')[0].onkeyup=function(){
+			if(!monpari3Visible){
+				monpariVisible=true;
+				showGuessmonpari3();
+			}
+		};
 	 }
 	});
 }
@@ -129,9 +147,12 @@ var showGuessmonpari3 = function(){
 	 callback:function(){
 		document.getElementsByName('poids')[0].onchange=function(){
 			setCompleted("monpari3");
-			
+			if(!monpari3Visible){
+				monpariVisible=true;
+				showGuessmonpari3();
+			}
 		}
-		document.getElementsByName('poids')[0].onkeypress=function(){
+		document.getElementsByName('poids')[0].onkeyup=function(){
 			if(!monpari4Visible){
 				monpari4Visible=true;
 				showGuessFormPrenom();
@@ -146,7 +167,7 @@ var showGuessFormPrenom = function(){
 	Typed.new('.monpari4', {
 	  strings: ['<div>'
 	 +'<div>Ses parents auront choisi le prénom : <nbsp>'
-	 +'<input type="text" class="nl-ti-text" name="prenom" value="" placeholder="Le prénom"/></div>'	 
+	 +'<input type="text" class="nl-ti-text" name="prenom" value="" placeholder="Le prénom"/></div>'
 	 ],
 	 typeSpeed: 1,
 	 startDelay:0,
@@ -155,23 +176,23 @@ var showGuessFormPrenom = function(){
 	 callback:function(){
 		document.getElementsByName('prenom')[0].onchange=function(){
 			setCompleted("monpari4");
-			if(!buttonValidationVisible){	
+			if(!buttonValidationVisible){
 				document.getElementById('validationbtn').disabled=false;
 			}
 			document.getElementById('validationbtn').style.display='block';
 		}
-		
-		document.getElementsByName('prenom')[0].onkeypress=function(){
-			if(!buttonValidationVisible){			
-				buttonValidationVisible=true;	
-				
+
+		document.getElementsByName('prenom')[0].onkeyup=function(){
+			if(!buttonValidationVisible){
+				buttonValidationVisible=true;
+
 				document.getElementById('validationbtn').disabled=false;
 				document.getElementById('validationbtn').style.display='block';
-				
+
 			}
 		}
 	 }
-	  
+
 	});
 };
 
@@ -183,7 +204,7 @@ document.getElementById('validationbtn').style.display='none';
 var sendTentative = function(data){
 	var oReq = new XMLHttpRequest();
 	var host = 'https://hook.io/mikael-came-gmail-com/betonmybaby'
-	
+
 	var data = loadData();
 	console.log("data query,",serialize(data));
 	var url = host + "/?" +serialize(data);
@@ -209,7 +230,7 @@ var loadData = function(){
 				date:'',
 				moment:'',
 				prenom:''
-		
+
 	};
 	if(document.getElementsByName('nom')[0])
 	data.nom = document.getElementsByName('nom')[0].value;
@@ -225,6 +246,6 @@ var loadData = function(){
 	data.moment = document.getElementsByName('select')[0].value;
 	if(document.getElementsByName('prenom')[0])
 	data.prenom = document.getElementsByName('prenom')[0].value;
-	
+
 	return data;
 };
