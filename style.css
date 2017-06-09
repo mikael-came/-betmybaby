@@ -91,6 +91,12 @@ body {
 	cursor: pointer;
 	border-bottom: 1px dashed #fff;
 }
+.nl-form select  option {
+	background-color: transparent !important;
+	color: #000;
+	-webkit-appearance: none; 
+     -moz-appearance: none;
+}
 .nl-form input.adresse{
   min-width: 8em;
   overflow: auto;

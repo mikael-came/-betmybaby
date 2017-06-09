@@ -30,7 +30,7 @@ var showFormulaire = function(){
 		 +'<input type="text" name="adresse" class="nl-ti-text adresse" value="" placeholder="Votre adresse postale"/></div>'		 
 	 ],
 	 typeSpeed: 0,
-	 startDelay:1000,
+	 startDelay:500,
 	 contentType:'html',
 	 showCursor:false,
 		callback:function(){
