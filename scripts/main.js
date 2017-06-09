@@ -135,8 +135,6 @@ var showGuessmonpari3 = function(){
 			if(!monpari4Visible){
 				monpari4Visible=true;
 				showGuessFormPrenom();
-				document.getElementById('validationbtn').style.display='block';
-
 			}
 		}
 	 }
@@ -161,8 +159,11 @@ var showGuessFormPrenom = function(){
 		
 		document.getElementsByName('prenom')[0].onkeypress=function(){
 			if(!buttonValidationVisible){			
-				buttonValidationVisible=true;				
+				buttonValidationVisible=true;	
+				
 				document.getElementById('validationbtn').disabled=false;
+				document.getElementById('validationbtn').style.display='block';
+				
 			}
 		}
 	 }
@@ -172,6 +173,8 @@ var showGuessFormPrenom = function(){
 
 var buttonValidationVisible = false;
 document.getElementById('validationbtn').disabled=true;
+document.getElementById('validationbtn').style.display='none';
+
 
 var sendTentative = function(data){
 	var oReq = new XMLHttpRequest();
@@ -179,7 +182,7 @@ var sendTentative = function(data){
 	
 	var data = loadData();
 	console.log("data query,",serialize(data));
-	var url = host + "/?data=" +serialize(data);
+	var url = host + "/?" +serialize(data);
 	oReq.open('POST', url);
 	oReq.send(null);
 
