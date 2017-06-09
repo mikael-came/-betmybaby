@@ -155,6 +155,10 @@ var showGuessFormPrenom = function(){
 	 callback:function(){
 		document.getElementsByName('prenom')[0].onchange=function(){
 			setCompleted("monpari4");
+			if(!buttonValidationVisible){	
+				document.getElementById('validationbtn').disabled=false;
+			}
+			document.getElementById('validationbtn').style.display='block';
 		}
 		
 		document.getElementsByName('prenom')[0].onkeypress=function(){
