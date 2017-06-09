@@ -12,7 +12,7 @@
 
 	requirejs(["scripts/typed.js"], function(util) {
 		showIntro();
-		showGuessFormPrenom();
+		
 		
 	});
 
