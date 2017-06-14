@@ -112,13 +112,13 @@ var showGuessFormSuite = function(){
 		document.getElementsByName('taille')[0].onchange=function(){
 			setCompleted("monpari2");
 			if(!monpari3Visible){
-				monpariVisible=true;
+				monpari3Visible=true;
 				showGuessmonpari3();
 			}
 		};
 		document.getElementsByName('taille')[0].onkeyup=function(){
 			if(!monpari3Visible){
-				monpariVisible=true;
+				monpari3Visible=true;
 				showGuessmonpari3();
 			}
 		};
@@ -147,9 +147,9 @@ var showGuessmonpari3 = function(){
 	 callback:function(){
 		document.getElementsByName('poids')[0].onchange=function(){
 			setCompleted("monpari3");
-			if(!monpari3Visible){
-				monpariVisible=true;
-				showGuessmonpari3();
+			if(!monpari4Visible){
+				monpari4Visible=true;
+				showGuessFormPrenom();
 			}
 		}
 		document.getElementsByName('poids')[0].onkeyup=function(){
