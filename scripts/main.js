@@ -203,7 +203,7 @@ document.getElementById('validationbtn').style.display='none';
 
 var sendTentative = function(data){
 	var oReq = new XMLHttpRequest();
-	var host = 'https://hook.io/mikael-came-gmail-com/betonmybaby'
+	var host = 'https://hook.io/mikael-came-gmail-com/betbaby'
 
 	var data = loadData();
 	console.log("data query,",serialize(data));
